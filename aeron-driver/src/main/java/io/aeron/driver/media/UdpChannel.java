@@ -806,8 +806,11 @@ public final class UdpChannel
         final byte[] addressAsBytes = endpointAddress.getAddress().getAddress();
         validateDataAddress(addressAsBytes);
 
-        addressAsBytes[addressAsBytes.length - 1]++;
-        return new InetSocketAddress(getByAddress(addressAsBytes), endpointAddress.getPort());
+        //        addressAsBytes[addressAsBytes.length - 1]++;
+        //        return new InetSocketAddress(getByAddress(addressAsBytes), endpointAddress.getPort());
+
+        // Use 2 ports instead of 2 IPs
+        return new InetSocketAddress(getByAddress(addressAsBytes), endpointAddress.getPort() + 1);
     }
 
     private static InterfaceSearchAddress getInterfaceSearchAddress(final ChannelUri uri) throws UnknownHostException
